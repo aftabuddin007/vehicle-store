@@ -28,7 +28,7 @@ interface IUser{
 
 
 
-const userSchema = new mongoose.Schema<IUser>({
+const userSchema =new mongoose.Schema<IUser>({
 
     name:{
     type:String,
@@ -54,9 +54,11 @@ role:{
     default:"user"
 },
 isApproved:{
+    type:Boolean,
     default:false
 },
 verificationStatus:{
+     type:String,
     enum:["pending","approved","rejected"],
     default:"pending"
 },

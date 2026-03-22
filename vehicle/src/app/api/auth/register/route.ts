@@ -1,5 +1,37 @@
-import { NextRequest } from "next/server";
+import connectDb from "@/lib/connectDB";
+import User from "@/model/user.model";
+import bcrypt from "bcryptjs";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req:NextRequest){
-    const {name}
+
+try{
+ await connectDb()
+    const {name,email,password}=await req.json()
+    const existUser = await User.findOne({email})
+    if(existUser){
+        return NextResponse.json({
+            message:"user is already exist"
+        },{status:400})
+    }
+    if(password < 6){
+         return NextResponse.json({
+        message:"password must be atleast 6 charecter"
+        },{status:400})
+    }
+    const hashPassword = await bcrypt.hash(password,10)
+    const user = await User.create({
+        name,email,password:hashPassword
+    })
+    return NextResponse.json({
+        user
+    },{status:201})
+}
+catch(err){
+    return NextResponse.json({
+        message:`register error ${err}`
+    },{status:500})
+}
+
+   
 }
