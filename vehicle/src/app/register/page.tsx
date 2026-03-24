@@ -1,18 +1,18 @@
 'use client'
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from "motion/react"
-import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { ClipLoader } from 'react-spinners';
+import { useRouter } from 'next/navigation';
 const Register = () => {
-    const [step,setStep] = useState<1 |2>(1)
-    const [name,setName]=useState("")
-    const [email,setEmail]=useState("")
-    const [password,setPassword]=useState("")
-    const router = useRouter()
-    const [loading,setLoading] =useState(false)
+    const [step,setStep] = useState<1 |2>(1);
+    const [name,setName]=useState("");
+    const [email,setEmail]=useState("");
+    const [password,setPassword]=useState("");
+    const router = useRouter();
+    const [loading,setLoading] =useState(false);
     const handleSignUp = async (e:React.FormEvent)=>{
-    
+    e.preventDefault()
     setLoading(true)
         try{
             const result = await axios.post("/api/auth/register",{name,email,password})
