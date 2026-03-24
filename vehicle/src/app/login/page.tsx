@@ -88,7 +88,7 @@ router.push("/")
                 {/* Google Button */}
                 <motion.button
                     type="button"
-                    // onClick={() => signIn("google")}
+                    onClick={() => signIn("google",{callbackUrl:"/"})}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="w-full py-3 bg-white text-black rounded-xl font-medium flex items-center justify-center gap-2"

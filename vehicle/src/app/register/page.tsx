@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "motion/react"
 import axios from 'axios';
 import { ClipLoader } from 'react-spinners';
 import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 const Register = () => {
     const [step,setStep] = useState<1 |2>(1);
     const [name,setName]=useState("");
@@ -126,7 +127,7 @@ className='w-full max-w-md bg-white/10 backdrop-blur-md rounded-2xl shadow-2xl p
 {/* Google Button */}
 <motion.button
     type="button"
-    // onClick={() => signIn("google")}
+    onClick={() => signIn("google",{callbackUrl:"/"})}
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
     className="w-full py-3 bg-white text-black rounded-xl font-medium flex items-center justify-center gap-2"
