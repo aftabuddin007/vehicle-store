@@ -14,7 +14,7 @@ try{
             message:"user is already exist"
         },{status:400})
     }
-    if(password < 6){
+    if(password.length < 6){
          return NextResponse.json({
         message:"password must be atleast 6 charecter"
         },{status:400})
@@ -27,9 +27,9 @@ try{
         user
     },{status:201})
 }
-catch(err){
+catch(error){
     return NextResponse.json({
-        message:`register error ${err}`
+        message:`register error ${error}`
     },{status:500})
 }
 
