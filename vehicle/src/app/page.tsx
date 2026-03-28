@@ -1,5 +1,6 @@
 import { auth } from '@/auth';
 import EditRoleAndPhone from '@/component/EditRoleAndPhone';
+import Navbar from '@/component/Navbar';
 import connectDb from '@/lib/connectDB';
 import User from '@/model/user.model';
 import { redirect } from 'next/navigation';
@@ -22,8 +23,8 @@ if(inComplete){
 
 
   return (
-    <div>
-      
+    <div className='min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900 '>
+      <Navbar user={user}></Navbar>
     </div>
   );
 };
