@@ -20,11 +20,11 @@ if(inComplete){
   return <EditRoleAndPhone></EditRoleAndPhone>
 }
 
-
+const plainUser = JSON.parse(JSON.stringify(user))
 
   return (
     <div className='min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900 '>
-      <Navbar user={user}></Navbar>
+      <Navbar user={plainUser}></Navbar>
     </div>
   );
 };
