@@ -11,11 +11,21 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { IoMdLogIn } from "react-icons/io";
 import { RiLogoutBoxLine } from "react-icons/ri";
-import { signOut } from 'next-auth/react';
+import { signIn, signOut } from 'next-auth/react';
 import { IoCartOutline } from "react-icons/io5";
 import { FaAlignJustify } from "react-icons/fa";
 import { AiOutlineClose } from 'react-icons/ai';
 import { AiOutlineHome } from "react-icons/ai";
+import { IoStorefrontOutline } from "react-icons/io5";
+import { CiShop } from "react-icons/ci";
+import { MdFavoriteBorder } from "react-icons/md";
+import { ImProfile } from 'react-icons/im';
+
+
+
+
+
+
 function Navbar ({user}:{user:IUser}){
     const router = useRouter()
     // console.log(user);
@@ -132,6 +142,12 @@ const [sidebarOpen,setSidebarOpen]=useState(false)
         </div>
         <div className='flex flex-col gap-4 text-lg'>
 <SidebarBtn label='Home' Icon={AiOutlineHome} path='/' router={router} setSidebarOpen={setSidebarOpen}></SidebarBtn>
+<SidebarBtn label='Category' Icon={IoStorefrontOutline} path='/category' router={router} setSidebarOpen={setSidebarOpen}></SidebarBtn>
+<SidebarBtn label='Shop' Icon={CiShop} path='/shop' router={router} setSidebarOpen={setSidebarOpen}></SidebarBtn>
+<SidebarBtn label='Orders' Icon={MdFavoriteBorder} path='/orders' router={router} setSidebarOpen={setSidebarOpen}></SidebarBtn>
+<SidebarBtn label='Profile' Icon={ImProfile } path='/profile' router={router} setSidebarOpen={setSidebarOpen}></SidebarBtn>
+<SidebarBtn label='Login' Icon={IoMdLogIn} path='/login' router={router} setSidebarOpen={setSidebarOpen}></SidebarBtn>
+<SidebarLogoutBtn label='LogOut' Icon={RiLogoutBoxLine} setSidebarOpen={setSidebarOpen}></SidebarLogoutBtn>
 
         </div>
     </motion.div>}
@@ -176,6 +192,11 @@ const CartBtn = ({router,count}:any)=>(
 )
 const SidebarBtn = ({label,path,router,Icon,setSidebarOpen}:any)=>(
 <button className="flex items-center gap-3 px-4 py-2 rounded-lg bg-[#6a69693c] hover:bg-white/10 text-left" onClick={()=>{router.push(path);setSidebarOpen(false)}}>
+<Icon size={20}></Icon>{label}
+</button>
+)
+const SidebarLogoutBtn = ({label,Icon,setSidebarOpen}:any)=>(
+<button className="flex items-center gap-3 px-4 py-2 rounded-lg bg-[#6a69693c] hover:bg-white/10 text-left" onClick={()=>{signOut();setSidebarOpen(false)}}>
 <Icon size={20}></Icon>{label}
 </button>
 )
