@@ -13,7 +13,7 @@ import { IoMdLogIn } from "react-icons/io";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { signOut } from 'next-auth/react';
 import { IoCartOutline } from "react-icons/io5";
-
+import { FaAlignJustify } from "react-icons/fa";
 function Navbar ({user}:{user:IUser}){
     const router = useRouter()
     // console.log(user);
@@ -72,6 +72,53 @@ const [openManu,setOpenManu]=useState(false)
 
 </div>
 { user?.role == "user" && <CartBtn router={router} count = "5"></CartBtn>}
+                    </div>
+                    {/* mobile icon */}
+                    <div className="md:hidden flex items-center gap-4">
+                        {user?.role == "vendor" || user?.role == "admin" 
+                        ?(<>
+                        <IconBtn Icon = {FaSnapchat} onClick={()=>router.push("/support")} ></IconBtn>
+                        <div className="relative">
+    {user?.image ? <Image className='w-10 h-10 rounded-full object-cover border border-gray-700 cursor-pointer' src={user?.image} alt='image' width={32} height={32} onClick={()=>setOpenManu(!openManu)}></Image>
+:<IconBtn  Icon = {CgProfile} onClick={()=>setOpenManu(!openManu)} ></IconBtn> }
+
+<AnimatePresence>
+    { openManu && <motion.div  
+    initial={{opacity:0,y:40}}
+                animate={{opacity:1,y:-10}}
+                transition={{duration:0.5}}
+                exit={{opacity:0,y:-10}}className="absolute right-0 mt-2 w-48 bg-[#6a69693c] text-white backdrop-blur-lg rounded-md shadow-lg py-2 z-50 ">
+<DropdownBtn Icon={CgProfile} label='profile' onClick={()=>{router.push("/profile"); setOpenManu(false)}}></DropdownBtn>
+
+<DropdownBtn Icon={IoMdLogIn} label='Login' onClick={()=>{router.push("/login"); setOpenManu(false)}}></DropdownBtn>
+
+<DropdownBtn Icon={RiLogoutBoxLine} label='LogOut' onClick={()=>{signOut(); setOpenManu(false)}}></DropdownBtn>
+
+    </motion.div>}
+</AnimatePresence>
+
+
+
+
+
+
+
+
+
+</div>
+                        </>)
+                        :(
+                            <>
+                            <IconBtn Icon={IoIosSearch } onClick={()=>router.push("/category")}>
+        </IconBtn>
+       
+<IconBtn Icon = {FaSnapchat} onClick={()=>router.push("/support")} ></IconBtn>
+<CartBtn router={router} count = "5"></CartBtn>
+<FaAlignJustify />
+
+
+                             </>
+                        ) }
                     </div>
             </div>
         </div>
