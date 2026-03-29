@@ -14,10 +14,13 @@ import { RiLogoutBoxLine } from "react-icons/ri";
 import { signOut } from 'next-auth/react';
 import { IoCartOutline } from "react-icons/io5";
 import { FaAlignJustify } from "react-icons/fa";
+import { AiOutlineClose } from 'react-icons/ai';
+import { AiOutlineHome } from "react-icons/ai";
 function Navbar ({user}:{user:IUser}){
     const router = useRouter()
     // console.log(user);
 const [openManu,setOpenManu]=useState(false)
+const [sidebarOpen,setSidebarOpen]=useState(false)
 
 
 
@@ -114,7 +117,29 @@ const [openManu,setOpenManu]=useState(false)
        
 <IconBtn Icon = {FaSnapchat} onClick={()=>router.push("/support")} ></IconBtn>
 <CartBtn router={router} count = "5"></CartBtn>
-<FaAlignJustify />
+<FaAlignJustify  size={28} className='cursor-pointer' onClick={()=>setSidebarOpen(true)}/>
+
+<AnimatePresence>
+    {sidebarOpen && <motion.div
+    initial={{opacity:0,x:"100%"}}
+    animate={{opacity:1,x:0}}
+    transition={{type: "spring", stiffness:200, duration:0.5}} 
+    exit={{x:"100%"}}
+    className="fixed top-0 right-0 h-screen w-[65%] bg-black/90 backdrop-blur-lg z-50 flex flex-col text-white p-4">
+        <div className='flex justify-between mb-6 w-full items-center'>
+<h1 className="text-xl font-semibold">Manu</h1>
+<AiOutlineClose size={28} className='cursor-pointer' onClick={() => setSidebarOpen(false)}></AiOutlineClose>
+        </div>
+        <div className='flex flex-col gap-4 text-lg'>
+<SidebarBtn label='Home' Icon={AiOutlineHome} path='/' router={router} setSidebarOpen={setSidebarOpen}></SidebarBtn>
+
+        </div>
+    </motion.div>}
+</AnimatePresence>
+
+
+
+
 
 
                              </>
@@ -148,4 +173,9 @@ const CartBtn = ({router,count}:any)=>(
         <IoCartOutline size={24}></IoCartOutline>
        {count > 0 && <span className='absolute -top-2 -right-2 bg-blue-500 text-white text-xs rounded-full px-1'>{count}</span>}
     </motion.button>
+)
+const SidebarBtn = ({label,path,router,Icon,setSidebarOpen}:any)=>(
+<button className="flex items-center gap-3 px-4 py-2 rounded-lg bg-[#6a69693c] hover:bg-white/10 text-left" onClick={()=>{router.push(path);setSidebarOpen(false)}}>
+<Icon size={20}></Icon>{label}
+</button>
 )
