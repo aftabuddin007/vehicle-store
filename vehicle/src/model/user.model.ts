@@ -21,6 +21,8 @@ export interface IUser{
     }[];
     createdAt?:Date;
     updatedAt?:Date;
+    shopName?:string;
+    shopAddress?:string;
 
 
 }
@@ -68,6 +70,12 @@ approvedAt:{
 requestedAt:{
     type:Date
 },
+shopName:{
+    type:String,
+},
+shopAddress:{
+    type:String,
+},      
 rejectedReason:{
     type:String,
 
