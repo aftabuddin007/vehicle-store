@@ -17,10 +17,24 @@ import {
   FaCheckCircle 
 } from "react-icons/fa";
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
+import DashboardAdmin from './DashboardAdmin';
+import VenderDetails from './VenderDetails';
+import UserOrders from './userOrders';
+import VendorApproval from './VendorApproval';
+import ProductApproval from './ProductApproval';
 const AdminDashboard = () => {
 const [activePage,setActivePage] = useState("dashboard")
 const [openManu,setOpenManu] = useState(false)
-
+const renderPage = ()=>{
+    switch(activePage){
+        case "dashboard" : return <DashboardAdmin></DashboardAdmin>;
+        case "vendors" : return <VenderDetails></VenderDetails>;
+        case "orders" : return <UserOrders></UserOrders>;
+        case "vendor-approval" : return <VendorApproval></VendorApproval>;
+        case "product-approval" : return <ProductApproval></ProductApproval>;
+        
+    }
+}
 
 
     const menu = [
@@ -40,11 +54,6 @@ const [openManu,setOpenManu] = useState(false)
     icon: <FaShoppingBag size={22} />
   },
   {
-    id: "deliveries",
-    label: "Deliveries",
-    icon: <FaTruck size={22} />
-  },
-  {
     id: "vendor-approval",
     label: "Vendor Approval",
     icon: <FaCheckCircle size={22} />
@@ -54,15 +63,10 @@ const [openManu,setOpenManu] = useState(false)
     label: "Product Approval",
     icon: <FaCheckCircle size={22} />
   },
-  {
-    id: "settings",
-    label: "Settings",
-    icon: <FaCog size={22} />
-  }
 ];
 
     return (
-        <div className='w-full min-h-screen  bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white '>
+        <div className='w-full min-h-screen  bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white flex'>
           {/* mobile tab bar */}
           <div className="lg:hidden fixed top-16 left-0 w-full bg-black border-gray-700 z-50 border-b items-center px-6 py-3 flex justify-between ">
 <h1 className="text-xl font-bold ">Admin Panel</h1>
@@ -80,7 +84,7 @@ const [openManu,setOpenManu] = useState(false)
             initial={{opacity:0,x:-50}}
             animate={{opacity:1,x:0}}
             transition={{duration:0.5}}
-            className='hidden lg:block w-72 h-screen bg-gray-800/40 border-r border-gray-700 p-6 backdrop-blur-xl'> 
+            className='hidden lg:block w-72 h-screen bg-gray-800/40 border-r border-gray-700 p-6 mt-13 backdrop-blur-xl'> 
 <h1 className="text-xl font-bold mb-6">Admin Panel</h1>
 <div className="flex flex-col gap-3">
     {
@@ -113,8 +117,8 @@ const [openManu,setOpenManu] = useState(false)
     {
         menu.map((item)=>(
                 <button key={item.id}
-                onClick={()=>setActivePage(item.id)}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all text-sm ${activePage === item.id ? "bg-blue-600 text-white" : "bg-gray-800 hover:bg-blue-700"}`} >
+                onClick={()=>{setOpenManu(false);setActivePage(item.id)}}
+                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all text-sm ${activePage === item.id ? "bg-blue-600 text-white" : "bg-black/20 hover:bg-blue-700"}`} >
                 {item.icon}
                 <span>{item.label}</span>
 
@@ -125,6 +129,17 @@ const [openManu,setOpenManu] = useState(false)
     </motion.div>)}
 
 </AnimatePresence>
+
+{/* main area */}
+<motion.div 
+initial={{opacity:0, x:40}}
+animate={{opacity:1}}
+transition={{duration:0.5}}
+className='flex-1 p-10 mt-16 lg:mt-0'
+>
+{renderPage()}
+</motion.div>
+
 
         </div>
     );
