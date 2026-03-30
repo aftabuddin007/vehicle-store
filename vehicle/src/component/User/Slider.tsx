@@ -52,7 +52,7 @@ const Slider = () => {
   }
 
   return (
-    <div className='relative w-full min-h-[90vh] overflow-hidden bg-black text-white rounded-2xl md:mt-[60px]'>
+    <div className='relative w-full min-h-[90vh] overflow-hidden bg-black text-white  md:mt-[60px]'>
 
       {/* SLIDE */}
       <AnimatePresence mode="wait">

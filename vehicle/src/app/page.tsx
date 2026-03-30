@@ -28,7 +28,7 @@ const plainUser = JSON.parse(JSON.stringify(user))
   return (
     <div className='min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900 '>
       <Navbar user={plainUser}></Navbar>
-    {user?.role == "user" ? <UserDashboard></UserDashboard>:user?.role == "vendor" ? <VendorDashboard></VendorDashboard> :<AdminDashboard></AdminDashboard>}
+    {user?.role == "user" ? (<UserDashboard></UserDashboard>):user?.role == "vendor" ? (<VendorDashboard></VendorDashboard>) :(<AdminDashboard></AdminDashboard>)}
     </div>
   );
 };
