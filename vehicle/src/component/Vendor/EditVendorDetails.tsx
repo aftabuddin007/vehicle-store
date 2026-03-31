@@ -1,13 +1,36 @@
 "use client"; 
 
+import axios from 'axios';
 import { AnimatePresence,motion } from 'motion/react';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { AiOutlineHome, AiOutlineShop } from 'react-icons/ai';
 
-const EditVendorDetails = () => {
+const EditVendorDetails =  () => {
     const [shopName,setShopName] = useState("")
     const [shopAddress,setShopAddress] = useState("")
-   
+    const [loading,setLoading]= useState(false)
+    const router = useRouter()
+   const handleSubmit =async (e:React.FormEvent)=>{
+    e.preventDefault()
+    if(!shopName || !shopAddress){
+        alert("Please enter your shop name and address to continue")
+        return;
+    }
+setLoading(true)
+try{
+    const result = await axios.post("/api/vendor/editDetails",{shopName,shopAddress})
+    console.log(result.data);
+    alert("Shop details updated successfully")
+    setLoading(false)
+    router.push("/")
+}
+catch(err){
+     setLoading(false)
+    console.log(err);
+}
+
+}
     return (
         <div className='min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white' >
            <AnimatePresence>
@@ -21,7 +44,7 @@ const EditVendorDetails = () => {
                 <h3 className="text-3xl font-semibold text-center">Complete your shop details</h3>
                 <p className="text-sm text-gray-300 mb-6 text-center mt-3">Enter Your business information to activate your vendor account</p>
                 
-                <form className='flex flex-col gap-6'>
+                <form onSubmit={handleSubmit} className='flex flex-col gap-6'>
                     <div className="relative">
                         <AiOutlineShop className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400' size={24} />
                         <input 
