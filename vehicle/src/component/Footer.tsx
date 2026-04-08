@@ -22,7 +22,7 @@ const UserFooter = ({ currentYear, socialLinks, quickLinks, supportLinks }: any)
       
       {/* Company Info Section */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+        <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent p-4">
           VehicleStore
         </h2>
         <p className="text-gray-300 text-sm leading-relaxed">
