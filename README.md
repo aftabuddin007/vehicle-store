@@ -33,13 +33,7 @@ AutoVault is engineered using modern, high-performance web technologies:
 
 ---
 
-## 🚀 Getting Started
-
-### Prerequisites
-Ensure you have the following installed on your machine:
-- Node.js (v18.x or higher)
-- npm or yarn
-- MongoDB Atlas account or a local MongoDB instance
+## 🚀 Getting Start
 
 ### Why this structure works perfectly for your GitHub profile:
 1. **Professional Naming & Formatting:** Uses distinctive badges, emojis, and clear visual dividers so potential employers or open-source contributors can easily scan your repository.
